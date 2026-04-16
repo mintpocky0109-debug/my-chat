@@ -161,9 +161,17 @@
     const isPageHidden = document.hidden; // 사용자가 다른 탭을 보고 있으면 true
 
     if (isNotMe && isPageHidden && Notification.permission === 'granted') {
-      new Notification(`${data.name}님의 메시지`, {
-        body: data.text
+     // 알림 생성
+      const notification = new Notification(`${data.name}님의 메시지`, {
+        body: data.text,
       });
+
+      // 알림 클릭 시 실행될 코드
+      notification.onclick = function(event) {
+        event.preventDefault(); // 브라우저 기본 동작 방지
+        window.focus();         // 현재 채팅창 탭으로 화면 이동
+        this.close();           // 알림창 닫기
+      };
     }
   });
 </script>
