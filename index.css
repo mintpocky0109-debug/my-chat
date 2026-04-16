@@ -1,0 +1,12 @@
+/* 1. 전체 폰트 적용 */
+body { 
+    font-family: 'Nanum Gothic', sans-serif; 
+}
+
+/* 2. 제목(h2) 스타일만 따로 지정 */
+h2 { 
+    font-family: 'Nanum Gothic', sans-serif; /* 나눔고딕 적용 */
+    font-weight: 700;                       /* 글자 두껍게 */
+    color: #1877f2;                        /* 색상 변경 (파란색 예시) */
+    text-align: center;                    /* 가운데 정렬 */
+}
