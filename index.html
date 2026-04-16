@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>내 실시간 채팅</title>
+    <title>실시간 채팅</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
+    
     <style>
-        .my-msg { color: blue; text-align: right; list-style: none; }
-        .other-msg { color: black; text-align: left; list-style: none; }
-        #messages { border: 1px solid #ccc; height: 300px; overflow-y: scroll; padding: 10px; margin-bottom: 10px; }
+        /* 2. 모바일에서 터치하기 편하게 크기를 키운 스타일입니다 */
+        body { font-family: sans-serif; margin: 0; padding: 10px; box-sizing: border-box; }
+        #messages { border: 1px solid #ccc; height: 350px; overflow-y: scroll; padding: 10px; margin-bottom: 10px; list-style: none; }
+        #input { width: 65%; padding: 12px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px; }
+        button { width: 25%; padding: 12px; font-size: 16px; cursor: pointer; }
+        .my-msg { color: blue; text-align: right; margin-bottom: 5px; }
+        .other-msg { color: black; text-align: left; margin-bottom: 5px; }
     </style>
 </head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <body>
     <h2>실시간 채팅방</h2>
     <input id="username" type="text" placeholder="닉네임 입력" style="width: 100px;">
