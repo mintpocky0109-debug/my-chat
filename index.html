@@ -8,12 +8,38 @@
     <meta charset="utf-8">
     
     <style>
-        /* 2. 모바일에서 터치하기 편하게 크기를 키운 스타일입니다 */
-        body { font-family: sans-serif; margin: 0; padding: 10px; box-sizing: border-box; }
-        #messages { border: 1px solid #ccc; height: 350px; overflow-y: scroll; padding: 10px; margin-bottom: 10px; list-style: none; }
+        /* 1. 전체 폰트를 '나눔고딕'으로 설정 (sans-serif 앞에 넣어야 합니다) */
+        body { 
+            font-family: 'Nanum Gothic', sans-serif; 
+            margin: 0; 
+            padding: 10px; 
+            box-sizing: border-box; 
+            background-color: #f8f9fa; /* 배경색 살짝 추가 */
+        }
+
+        /* 2. 제목 스타일 */
+        h2 { 
+            font-family: 'Nanum Gothic', sans-serif;
+            font-weight: 700;
+            color: #1877f2; 
+            text-align: center; 
+        }
+
+        /* 채팅 메시지 영역 */
+        #messages { 
+            background: white;
+            border: 1px solid #ddd; 
+            border-radius: 8px;
+            height: 350px; 
+            overflow-y: scroll; 
+            padding: 10px; 
+            margin-bottom: 10px; 
+            list-style: none; 
+        }
+
         #input { width: 65%; padding: 12px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px; }
-        button { width: 25%; padding: 12px; font-size: 16px; cursor: pointer; }
-        .my-msg { color: blue; text-align: right; margin-bottom: 5px; }
+        button { width: 25%; padding: 12px; font-size: 16px; cursor: pointer; background-color: #1877f2; color: white; border: none; border-radius: 4px; }
+        .my-msg { color: blue; text-align: right; margin-bottom: 5px; font-weight: bold; }
         .other-msg { color: black; text-align: left; margin-bottom: 5px; }
     </style>
 </head>
