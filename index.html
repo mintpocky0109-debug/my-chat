@@ -124,7 +124,7 @@
 <script>
   const socket = io();
 
-  // [추가] 브라우저 알림 권한 요청 (접속하자마자 물어봅니다)
+  // 1. 알림 권한 요청
   if (Notification.permission !== 'granted' && Notification.permission !== 'denied') {
     Notification.requestPermission();
   }
@@ -148,6 +148,7 @@
     const item = document.createElement('li');
     item.textContent = `${data.name} : ${data.text}`;
     
+    // 현재 입력된 내 닉네임 가져오기
     const myName = document.getElementById('username').value;
     item.className = (data.name === myName) ? 'my-msg' : 'other-msg';
     
@@ -155,14 +156,17 @@
     chatBox.appendChild(item);
     chatBox.scrollTop = chatBox.scrollHeight;
 
-    // [추가] 내가 보낸 게 아니고, 알림 권한이 허용된 경우에만 알림 띄우기
-    if (data.name !== myName && Notification.permission === 'granted') {
+    // 2. 알림 조건 체크 (내가 아니고 + 창이 가려져 있을 때만)
+    const isNotMe = data.name !== myName;
+    const isPageHidden = document.hidden; // 사용자가 다른 탭을 보고 있으면 true
+
+    if (isNotMe && isPageHidden && Notification.permission === 'granted') {
       new Notification(`${data.name}님의 메시지`, {
-        body: data.text,
-        // 필요하다면 아이콘 이미지 경로를 넣을 수 있습니다.
+        body: data.text
       });
     }
   });
 </script>
+
 </body>
 </html>
