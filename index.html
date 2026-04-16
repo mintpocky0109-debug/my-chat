@@ -121,37 +121,48 @@
     </div>
 
     <script src="/socket.io/socket.io.js"></script>
-    <script>
-      const socket = io();
+<script>
+  const socket = io();
 
-      function sendMessage() {
-        const nameInput = document.getElementById('username');
-        const msgInput = document.getElementById('input');
+  // [추가] 브라우저 알림 권한 요청 (접속하자마자 물어봅니다)
+  if (Notification.permission !== 'granted' && Notification.permission !== 'denied') {
+    Notification.requestPermission();
+  }
 
-        if (nameInput.value && msgInput.value) {
-          socket.emit('chat message', {
-            name: nameInput.value,
-            text: msgInput.value
-          });
-          msgInput.value = '';
-        } else {
-          alert("닉네임과 내용을 입력해주세요!");
-        }
-      }
+  function sendMessage() {
+    const nameInput = document.getElementById('username');
+    const msgInput = document.getElementById('input');
 
-      socket.on('chat message', function(data) {
-        const item = document.createElement('li');
-        // 메시지 내용을 담는 부분
-        item.textContent = `${data.name} : ${data.text}`;
-        
-        const myName = document.getElementById('username').value;
-        // 내가 보낸 건지 남이 보낸 건지에 따라 디자인 클래스 부여
-        item.className = (data.name === myName) ? 'my-msg' : 'other-msg';
-        
-        const chatBox = document.getElementById('messages');
-        chatBox.appendChild(item);
-        chatBox.scrollTop = chatBox.scrollHeight;
+    if (nameInput.value && msgInput.value) {
+      socket.emit('chat message', {
+        name: nameInput.value,
+        text: msgInput.value
       });
-    </script>
+      msgInput.value = '';
+    } else {
+      alert("닉네임과 내용을 입력해주세요!");
+    }
+  }
+
+  socket.on('chat message', function(data) {
+    const item = document.createElement('li');
+    item.textContent = `${data.name} : ${data.text}`;
+    
+    const myName = document.getElementById('username').value;
+    item.className = (data.name === myName) ? 'my-msg' : 'other-msg';
+    
+    const chatBox = document.getElementById('messages');
+    chatBox.appendChild(item);
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+    // [추가] 내가 보낸 게 아니고, 알림 권한이 허용된 경우에만 알림 띄우기
+    if (data.name !== myName && Notification.permission === 'granted') {
+      new Notification(`${data.name}님의 메시지`, {
+        body: data.text,
+        // 필요하다면 아이콘 이미지 경로를 넣을 수 있습니다.
+      });
+    }
+  });
+</script>
 </body>
 </html>
